@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="jumbotron pt-3">
+    <h2 class="text-center">Vulnerabilities</h2>
+    <div class="form-row mb-3">
+      <div class="form-group col-md-4">
+        <label for="inputEmail4">Search</label>
+        <input class="form-control" type="text" name="searchInput" [(ngModel)]="data">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputPassword4">Filter by category</label>
+        <select class="form-control" name="searchSelect" [(ngModel)]="data">
+          <option value="undefined"></option>
+          <option *ngFor="let categories of category"> {{ categories }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputEmail4">Choose Date</label>
+        <input class="form-control" type="text" ngxDaterangepickerMd [(ngModel)]="selected" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" *ngFor="let d of dados | filter: data : selected; let i = index">
+        <div class="card border-info mb-3">
+          <div class="card-header">
+            <strong>Category :</strong> {{d.Category}}
+            <span class="float-right"><strong>ID:</strong> {{d.ID}}</span>
+          </div>
+          <div class="card-body text-info">
+            <h5 class="card-title">{{d.Name}}</h5>
+            <p class="card-text">{{d.Description}}</p>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Asset</th>
+                  <th scope="col">Asset detail</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Responsible</th>
+                  <th scope="col">Port</th>
+                  <th scope="col">Protocol</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{d.Asset}}</td>
+                  <td>{{d.Assetdetail}}</td>
+                  <td>{{d.Status}}</td>
+                  <td>{{d.Responsible}}</td>
+                  <td>{{d.Port}}</td>
+                  <td>{{d.Protocol}}</td>
+                </tr>
+              </tbody>
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Service Name</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Tags</th>
+                  <th scope="col">KB</th>
+                  <th scope="col">Recommendations</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{d.Servicename}}</td>
+                  <td>{{d.Source}}</td>
+                  <td>{{d.Tags}}</td>
+                  <td>{{d.KB}}</td>
+                  <td>{{d.Recommendations}}</td>
+                  <td></td>
+                </tr>
+            </table>
+          </div>
+          <div class="card-footer bg-transparent border-info w-100">
+            <ul class="nav">
+              <li class="text-center" style="width:33.3%;">Changed Date: {{d.Changeddate}}</li>
+              <li class="text-center" style="width:33.3%;">Last Seen Date: {{d.Lastseendate}}</li>
+              <li class="text-center" style="width:33.3%;"> Duedate: {{d.Duedate}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" *ngIf="!filter">
+        Registro não encontrado
+      </div>
+    </div>
+  </div>
+
+</div>
